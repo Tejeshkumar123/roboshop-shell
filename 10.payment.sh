@@ -7,6 +7,7 @@ yum install python36 gcc python3-devel -y &>>/tmp/roboshop.log
 echo -e "\e[32m adding user and location\e[0m"
 useradd roboshop &>>/tmp/roboshop.log
 mkdir /app &>>/tmp/roboshop.log
+rm -rf *
 cd /app
 echo -e "\e[32m downloading new content and dependencies to payment server\e[0m"
 curl -O https://roboshop-artifacts.s3.amazonaws.com/payment.zip &>>/tmp/roboshop.log
