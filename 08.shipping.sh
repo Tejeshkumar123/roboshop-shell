@@ -15,7 +15,7 @@ echo -e "$color downloading dependencies and building application to shipping$no
 mvn clean package &>>${logfile}
 mv target/shipping-1.0.jar shipping.jar &>>${logfile}
 echo -e "$color creating shipping service file$nocolor"
-cp /root/repo-shell/shipping.service /etc/systemd/system/shipping.service
+cp /root/roboshop-shell/shipping.service /etc/systemd/system/shipping.service
 echo -e "$color downloading and installing mysql schema$nocolor"
 yum install mysql -y &>>${logfile}
 mysql -h mysql-dev.sindhu.cloud -uroot -pRoboShop@1 <${app_path}/schema/shipping.sql &>>${logfile}

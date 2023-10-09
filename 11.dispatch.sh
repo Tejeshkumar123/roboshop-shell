@@ -16,7 +16,7 @@ go mod init dispatch &>>${logfile}
 go get &>>${logfile}
 go build &>>${logfile}
 echo -e "$color creating dispatch service file $nocolor"
-cp /root/repo-shell/dispatch.service /etc/systemd/system/dispatch.service
+cp /root/roboshop-shell/dispatch.service /etc/systemd/system/dispatch.service
 echo -e "$color enabling and starting the dispatch service $nocolor"
 systemctl daemon-reload
 systemctl enable dispatch &>>${logfile}

@@ -12,7 +12,7 @@ curl -O https://roboshop-artifacts.s3.amazonaws.com/frontend.zip &>>${logfile}
 unzip frontend.zip &>>${logfile}
 rm -rf frontend.zip
 echo -e  "$colorCONFIGURING REVERSE PROXY SERVER$nocolor"
-cp /root/repo-shell/roboshop.conf  /etc/nginx/default.d/roboshop.conf
+cp /root/roboshop-shell/roboshop.conf  /etc/nginx/default.d/roboshop.conf
 echo -e "$color ENABLEING AND RESTARTING NGINX$nocolor"
 systemctl enable nginx &>>${logfile}
 systemctl restart nginx 

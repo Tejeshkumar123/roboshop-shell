@@ -13,7 +13,7 @@ curl -O https://roboshop-artifacts.s3.amazonaws.com/payment.zip &>>/tmp/roboshop
 unzip payment.zip &>>/tmp/payment.log
 pip3.6 install -r requirements.txt &>>/tmp/roboshop.log
 echo -e "\e[32m creating payment service\e[0m"
-cp /root/repo-shell/payment.service /etc/systemd/system/payment.service
+cp /root/roboshop-shell/payment.service /etc/systemd/system/payment.service
 echo -e "\e[32m enabling and starting payment service\e[0m"
 systemctl daemon-reload
 systemctl enable payment &>>/tmp/roboshop.log

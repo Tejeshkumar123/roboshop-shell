@@ -5,7 +5,7 @@ logfile="/tmp/roboshop.log"
 echo -e "$color disabling mysql defult version$nocolor"
 yum module disable mysql -y &>>${logfile}
 echo -e "$color setting mysql repo$nocolor"
-cp /root/repo-shell/mysql.repo /etc/yum.repos.d/mysql.repo
+cp /root/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo
 echo -e "$color installing mysql server$nocolor"
 yum install mysql-community-server -y &>>${logfile}
 echo -e "$color changing defult root password$nocolor"

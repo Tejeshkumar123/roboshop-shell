@@ -17,7 +17,7 @@ rm -rf cart.zip
 echo -e "\e[32m installing the dependencies$nocolor"
 npm install &>>${logfile}
 echo -e "\e[32m CREATING CART SERVICE FILE$nocolor"
-cp /root/repo-shell/cart.service /etc/systemd/system/cart.service
+cp /root/roboshop-shell/cart.service /etc/systemd/system/cart.service
 echo -e "\e[32m enabling and restarting the cart service$nocolor"
 systemctl daemon-reload
 systemctl enable cart &>>${logfile}
