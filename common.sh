@@ -42,3 +42,30 @@ service_start()
   systemctl enable ${component} &>>${logfile}
   systemctl restart ${component}
 }
+maven()
+{
+  echo -e "$color installing maven server$nocolor"
+  yum install maven -y &>>${logfile}
+  app_start
+  echo -e "$color downloading dependencies and building application to shipping$nocolor"
+  mvn clean package &>>${logfile}
+  mv target/shipping-1.0.jar shipping.jar &>>${logfile}
+  mysql_schema
+  service_start
+}
+mysql_schema()
+{
+  echo -e "$color downloading and installing mysql schema$nocolor"
+  yum install mysql -y &>>${logfile}
+  mysql -h mysql-dev.sindhu.cloud -uroot -pRoboShop@1 <${app_path}/schema/shipping.sql &>>${logfile}
+
+}
+python()
+{
+  echo -e "\e[32m installing python server\e[0m"
+  yum install python36 gcc python3-devel -y &>>${logfile}
+  app_start
+  echo -e "$color downloading dependencies for python service$nocolor"
+  pip3.6 install -r requirements.txt &>>${logfile}
+  service_start
+}
