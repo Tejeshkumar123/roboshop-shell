@@ -3,6 +3,13 @@ nocolor="\e[0m"
 logfile="/tmp/roboshop.log"
 app_path="/app"
 
+useradd()
+{
+  id roboshop &>>${logfile}
+    if [ $? -ne 0];then
+      useradd roboshop &>>${logfile}
+    fi
+}
 status()
 {
   if [ $? -eq 0 ];then
@@ -29,10 +36,7 @@ service_start
 app_start()
 {
   echo -e "$color ADDING USER$nocolor"
-  id roboshop &>>${logfile}
-  if [ $? -ne 0]; then
-    useradd roboshop &>>${logfile}
-  fi
+  useradd
   status
   echo -e "$color creating default app path$nocolor"
   mkdir ${app_path} &>>${logfile}
