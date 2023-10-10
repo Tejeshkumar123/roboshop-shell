@@ -28,7 +28,7 @@ service_start
 
 app_start()
 {
-  echo -e "$color ADDING USER AND LOCATION$nocolor"
+  echo -e "$color ADDING USER$nocolor"
   id roboshop &>>${logfile}
   if [ $? -ne 0]; then
     useradd roboshop &>>${logfile}
