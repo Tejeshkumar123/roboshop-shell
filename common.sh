@@ -29,7 +29,10 @@ service_start
 app_start()
 {
   echo -e "$color ADDING USER AND LOCATION$nocolor"
-  useradd roboshop &>>${logfile}
+  id roboshop &>>${logfile}
+  if [ $? -ne 0]; then
+    useradd roboshop &>>${logfile}
+  fi
   status
   echo -e "$color creating default app path$nocolor"
   mkdir ${app_path} &>>${logfile}
