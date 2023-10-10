@@ -5,20 +5,46 @@ app_path="/app"
 
 nodejs()
 {
-
 echo -e "$color DOWNLOADING NODEJS REPO$nocolor"
 curl -sL https://rpm.nodesource.com/setup_lts.x | bash &>>${logfile}
+if [ $? -eq 0 ];then
+  echo Success
+else
+  echo failure
+fi
+
 echo -e "$color INSTALLING NODEJS SERVICE$nocolor"
 yum install nodejs -y &>>${logfile}
+if [ $? -eq 0 ];then
+  echo Success
+else
+  echo failure
+fi
 app_start
 npm install &>>${logfile}
+if [ $? -eq 0 ];then
+  echo Success
+else
+  echo failure
+fi
 service_start
 }
 app_start()
 {
   echo -e "$color ADDING USER AND LOCATION$nocolor"
   useradd roboshop &>>${logfile}
+  if [ $? -eq 0 ];then
+    echo Success
+  else
+    echo failure
+  fi
+  echo -e "$color creating default app path$nocolor"
   mkdir ${app_path} &>>${logfile}
+   if [ $? -eq 0 ];then
+      echo Success
+    else
+      echo failure
+    fi
   cd ${app_path}
   rm -rf *
   echo -e "$color DOWNLOADING NEW CONTENT AND DEPENDENCIES$nocolor"
