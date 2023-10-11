@@ -9,7 +9,7 @@ cp /root/roboshop-shell/mysql.repo /etc/yum.repos.d/mysql.repo
 echo -e "$color installing mysql server$nocolor"
 yum install mysql-community-server -y &>>${logfile}
 echo -e "$color changing defult root password$nocolor"
-mysql_secure_installation --set-root-pass RoboShop@1 &>>${logfile}
+mysql_secure_installation --set-root-pass $1 &>>${logfile}
 echo -e "$color enabling and starting mysql server$nocolor"
 systemctl enable mysqld &>>${logfile}
 systemctl restart mysqld
