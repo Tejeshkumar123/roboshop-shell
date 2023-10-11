@@ -28,6 +28,7 @@ echo -e "$color INSTALLING NODEJS SERVICE$nocolor"
 yum install nodejs -y &>>${logfile}
 status
 app_start
+echo -e "$color INSTALLING dependences $nocolor"
 npm install &>>${logfile}
 status
 service_start
@@ -45,6 +46,8 @@ app_start()
   rm -rf *
   echo -e "$color DOWNLOADING NEW CONTENT AND DEPENDENCIES$nocolor"
   curl -O https://roboshop-artifacts.s3.amazonaws.com/${component}.zip &>>${logfile}
+  status
+  echo -e "$color Extracting the app Content$nocolor"
   unzip ${component}.zip &>>${logfile}
   status
   rm -rf ${component}.zip
@@ -67,38 +70,50 @@ service_start()
 {
   echo -e "$color CREATING ${component} SERVICE$nocolor"
   cp /root/roboshop-shell/${component}.service /etc/systemd/system/${component}.service
-  echo -e "$color ENABLEING AND STARTING THE ${component} SERVICE$nocolor"
+  status
+  echo -e "$color system reload THE ${component} SERVICE$nocolor"
   systemctl daemon-reload
+  status
+  echo -e "$color ENABLEING AND STARTING THE ${component} SERVICE$nocolor"
   systemctl enable ${component} &>>${logfile}
   systemctl restart ${component}
+  status
 }
 
 maven()
 {
   echo -e "$color installing maven server$nocolor"
   yum install maven -y &>>${logfile}
+  status
   app_start
-  echo -e "$color downloading dependencies and building application to shipping$nocolor"
+  echo -e "$color cleaning package $nocolor"
   mvn clean package &>>${logfile}
+  status
+  echo -e "$color building application $nocolor"
   mv target/shipping-1.0.jar shipping.jar &>>${logfile}
+  status
   mysql_schema
   service_start
 }
 
 mysql_schema()
 {
-  echo -e "$color downloading and installing mysql schema$nocolor"
+  echo -e "$color  installing mysql schema$nocolor"
   yum install mysql -y &>>${logfile}
+  status
+  echo -e "$color  setting mysql schema$nocolor"
   mysql -h mysql-dev.sindhu.cloud -uroot -pRoboShop@1 <${app_path}/schema/shipping.sql &>>${logfile}
-
+  status
 }
 
 python()
 {
   echo -e "\e[32m installing python server\e[0m"
   yum install python36 gcc python3-devel -y &>>${logfile}
+  status
   app_start
   echo -e "$color downloading dependencies for python service$nocolor"
   pip3.6 install -r requirements.txt &>>${logfile}
+  status
   service_start
 }
