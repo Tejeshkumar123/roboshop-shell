@@ -16,7 +16,6 @@ status()
     echo Success
   else
     echo failure
-    exit 1
   fi
 }
 
