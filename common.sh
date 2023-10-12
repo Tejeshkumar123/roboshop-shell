@@ -12,10 +12,11 @@ useradd()
 }
 status()
 {
-  if [ $? -eq 0 ];then
+  if [ $1 -eq 0 ];then
     echo Success
   else
     echo failure
+    exit 1
   fi
 }
 
