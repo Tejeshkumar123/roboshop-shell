@@ -62,7 +62,7 @@ echo -e "$color Installing Mongo schema$nocolor"
 yum install mongodb-org-shell -y &>>${logfile}
 status
 echo -e "$color Loading schema$nocolor"
-mongo --host mongodb-dev.sindhu.cloud <${app_path}/schema/${component}.js &>>${logfile}
+mongo --host mongodb-dev.tejesh.cloud <${app_path}/schema/${component}.js &>>${logfile}
 status
 }
 
@@ -102,7 +102,7 @@ mysql_schema()
   yum install mysql -y &>>${logfile}
   status
   echo -e "$color  setting mysql schema$nocolor"
-  mysql -h mysql-dev.sindhu.cloud -uroot -pRoboShop@1 <${app_path}/schema/shipping.sql &>>${logfile}
+  mysql -h mysql-dev.tejesh.cloud -uroot -pRoboShop@1 <${app_path}/schema/shipping.sql &>>${logfile}
   status
 }
 
